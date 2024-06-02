@@ -49,7 +49,7 @@ def load_data_from_spreadsheet():
         "auth_provider_x509_cert_url": st.secrets["GOOGLE_CREDENTIALS"]["auth_provider_x509_cert_url"],
         "client_x509_cert_url": st.secrets["GOOGLE_CREDENTIALS"]["client_x509_cert_url"]
     }
-    credentials = Credentials.from_service_account_file(
+    credentials = Credentials.from_service_account_info(
         PRIVATE_KEY_PATH,
         scopes=['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
     )
