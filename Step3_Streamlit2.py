@@ -10,15 +10,7 @@ from geopy.geocoders import Nominatim
 import folium
 from streamlit_folium import folium_static
 
-# 環境変数の読み込み
-load_dotenv()
-
-# 環境変数から認証情報を取得
-# Python コード
-SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
-PRIVATE_KEY_PATH = os.getenv("PRIVATE_KEY_PATH")
 SP_SHEET = 'シート1'  # シート名
-
 
 # セッション状態の初期化
 if 'show_all' not in st.session_state:
@@ -52,9 +44,11 @@ def load_data_from_spreadsheet():
 
     credentials = Credentials.from_service_account_info(google_credentials, scopes=scopes)
     gc = gspread.authorize(credentials)
+    SP_SHEET_KEY = st.secrets["SP_SHEET_KEY"]
+    sh = gc.open_by_key(SP_SHEET_KEY)
 
     # 物件データの読み込み
-    sh = gc.open_by_key(SPREADSHEET_ID)
+    sh = gc.open_by_key(SP_SHEET_KEY)
     property_worksheet = sh.worksheet('シート1')  # 物件情報シート
     property_data = property_worksheet.get_all_values()
     property_df = pd.DataFrame(property_data[1:], columns=property_data[0])
