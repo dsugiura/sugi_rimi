@@ -19,9 +19,6 @@ SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
 PRIVATE_KEY_PATH = os.getenv("PRIVATE_KEY_PATH")
 SP_SHEET = 'シート1'  # シート名
 
-print("PRIVATE_KEY_PATH:", os.getenv("PRIVATE_KEY_PATH"))
-
-
 
 # セッション状態の初期化
 if 'show_all' not in st.session_state:
