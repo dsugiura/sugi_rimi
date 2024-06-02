@@ -31,6 +31,24 @@ def toggle_show_all():
 
 # スプレッドシートからデータを読み込む関数
 def load_data_from_spreadsheet():
+    scopes = [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive'
+    ]
+
+    # secrets.tomlから認証情報を取得
+    google_credentials = {
+        "type": st.secrets["GOOGLE_CREDENTIALS"]["type"],
+        "project_id": st.secrets["GOOGLE_CREDENTIALS"]["project_id"],
+        "private_key_id": st.secrets["GOOGLE_CREDENTIALS"]["private_key_id"],
+        "private_key": st.secrets["GOOGLE_CREDENTIALS"]["private_key"],
+        "client_email": st.secrets["GOOGLE_CREDENTIALS"]["client_email"],
+        "client_id": st.secrets["GOOGLE_CREDENTIALS"]["client_id"],
+        "auth_uri": st.secrets["GOOGLE_CREDENTIALS"]["auth_uri"],
+        "token_uri": st.secrets["GOOGLE_CREDENTIALS"]["token_uri"],
+        "auth_provider_x509_cert_url": st.secrets["GOOGLE_CREDENTIALS"]["auth_provider_x509_cert_url"],
+        "client_x509_cert_url": st.secrets["GOOGLE_CREDENTIALS"]["client_x509_cert_url"]
+    }
     credentials = Credentials.from_service_account_file(
         PRIVATE_KEY_PATH,
         scopes=['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
